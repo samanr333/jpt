@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Fjalla+One&family=Ysabeau+SC&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            margin: 0;
+            background-color: #FECECC;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .Words-div {
+            padding-bottom: 20px;
+            font-size: 30px;
+        }
+        #pageText{
+            font-family: 'Dancing Script', cursive;
+            font-family: 'Fjalla One', sans-serif;
+            font-family: 'Ysabeau SC', sans-serif;
+            font-weight: 1000;
+            font-style: italic;
+        }
+        
+        #yesButton, #noButton{
+            padding: 10px;
+            font-family: 'Dancing Script', cursive;
+            font-family: 'Fjalla One', sans-serif;
+            font-family: 'Ysabeau SC', sans-serif;
+            background-color: lavender;
+            font-size: larger;
+            font-weight: bold;
+            color: black;
+        }
+        .buttonDiv {
+            padding-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bip {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background-color: transparent;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+    .no-button {
+            margin: 0 10px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .no-button {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform-origin: top left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="Words-div">
+            <p id="pageText">Will you be the Monica to my Chandler?</p>
+        </div>
+        <img src="before.jpg" class="bip" id="pageImg" alt="before">
+        <div class="buttonDiv">
+            <button class="yesButton" id="yesButton">Yes</button>
+            <button class="no-button" id="noButton">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const pageImg = document.getElementById('pageImg');
+
+        noButton.addEventListener('mouseover', () => {
+            moveButton();
+        });
+
+        const yesButton = document.getElementById('yesButton');
+        yesButton.addEventListener('click', () => {
+            onYesButtonClick();
+        });
+
+        function moveButton() {
+            const maxX = pageImg.clientWidth - noButton.clientWidth;
+            const maxY = pageImg.clientHeight - noButton.clientHeight;
+
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+
+            noButton.style.transform = `translate(${newX}px, ${newY}px)`;
+        }
+
+        window.addEventListener('resize', () => {
+            moveButton();
+        });
+
+        function onYesButtonClick() {
+            document.getElementById("pageText").innerHTML = "Yayyyyyyyyy!";
+            document.getElementById("pageImg").src = "after.gif";
+            const musicElement = document.createElement('audio');
+            musicElement.src = 'music.mp3'; 
+            musicElement.controls = true;
+            document.body.appendChild(musicElement);
+            musicElement.autoplay = true;
+            musicElement.hidden = true;
+        }
+    </script>
+</body>
+</html>
